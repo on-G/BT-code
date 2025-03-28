@@ -17,7 +17,7 @@ void makeNewTree() {
   TTree *oldtreeB            = (TTree *)fileB->Get("treeList_0_24_0_24_Sgn");
 
   // crea nuovo file .root
-  TFile *newfile          = new TFile("sgn_bkg_simul.root", "recreate");
+  TFile *newfile          = new TFile("SB_simul.root", "recreate");
   
   // per crare nuovi TREE
   // TTree *newtreeS      = new TTree("newtreeS", "newtreeS");
@@ -29,8 +29,8 @@ void makeNewTree() {
   // clonare la struttra dei TREE nel nuovo file .root
   TTree *treeS         = oldtreeS->CloneTree(0);
   TTree *treeB         = oldtreeB->CloneTree(0);
-  treeS->SetName("treeSgn");
-  treeB->SetName("treeBkg");
+  treeS->SetName("treeS");
+  treeB->SetName("treeB");
 
   /* Float_t massK0S_sig, tImpParBach_sig; */
   /* Float_t massK0S_bkg, tImpParBach_bkg; */

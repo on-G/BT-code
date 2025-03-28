@@ -13,8 +13,8 @@ class DataPreparation:
 
     def __init__(self,
                  file1_path,
-                 treeS_name = "TreeS",
-                 treeB_name = "TreeB"):
+                 treeS_name = "treeS",
+                 treeB_name = "treeB"):
         """
         CONSTRUCTOR to initialize the DataPreparation object.
         Parameters:
