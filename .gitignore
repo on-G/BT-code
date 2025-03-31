@@ -11,3 +11,11 @@
 
 # The pattern below matches any file with extension .out
 *.root
+
+#ignore __pycache__ folder
+__pycache__/
+
+
+#ignore output folders
+Analysis/plots/
+NeuralNetwork/evaluation_results
