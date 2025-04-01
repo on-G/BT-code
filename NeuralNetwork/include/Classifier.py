@@ -233,6 +233,14 @@ class SignalBackgroundClassifier:
         # print("Categorisation :")
         # print(classification_report(self.y_test_combined, self.predictions_combined))
 
+    ############################### Saving the model ###############################
+
+    def save_model(self, path):
+        if isinstance(self.clf, NeuralNetwork):
+            self.clf.save_NN(path)
+        else:
+            print("Model saving is not supported by this type of classifier.")
+
 
 ############################### CLASS NN ###############################
 
@@ -314,6 +322,11 @@ class NeuralNetwork:
 
         # Calculates the elapsed time for training
         self.training_time = time.time() - start_time
+
+    ############################### Saving the neural network ###############################
+
+    def save_NN(self, path):
+        self.model.save(path)
 
 ############################### CLASS Additional tools ###############################
 

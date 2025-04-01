@@ -139,5 +139,16 @@ with open(output_file, "w") as f:
     print("----------------------------------------print_metrics--------------------")
     metrics_printer.print_metrics()
 
+############################### Saving the model ###############################
+print("-------------------- SAVING THE MODEL --------------------")
+
+output_folder = "saved_models"
+
+save_file = os.path.join(output_folder, "Sequential_NN.h5")
+
+classifier.save_model(save_file)
+
+print("-------------------- Model saved --------------------")
+
 ############################### End ###############################
 print("--------------------END--------------------")
