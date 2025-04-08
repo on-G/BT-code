@@ -19,6 +19,7 @@ __pycache__/
 #ignore output folders
 Analysis/plots/
 NeuralNetwork/evaluation_results
+NeuralNetwork/saved_models
 
 #ignore ide foders
 .vscode/
