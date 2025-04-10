@@ -144,7 +144,7 @@ print("-------------------- SAVING THE MODEL --------------------")
 
 output_folder = "saved_models"
 
-save_file = os.path.join(output_folder, "Sequential_NN.h5")
+save_file = os.path.join(output_folder, "Sequential_NN.keras")
 
 classifier.save_model(save_file)
 
