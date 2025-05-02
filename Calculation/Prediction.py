@@ -1,6 +1,6 @@
 import os
-import json
 import Include.DataPreparation as dp
+import numpy as np
 from tensorflow import keras
 
 # data file path
@@ -20,8 +20,7 @@ model_path = os.path.join("..", "NeuralNetwork", "saved_models", "Sequential_NN.
 model = keras.models.load_model(model_path, compile=True)
 
 # Run model
-prob = model.predict(X_data)
+probas = model.predict(X_data)
 
 # Save output
-with open('probs.txt', 'w') as file:
-    json.dump(prob.ToList(), file)
+np.savetxt("probs.txt", probas, fmt='%2.3f')

@@ -23,3 +23,5 @@ NeuralNetwork/saved_models
 
 #ignore ide foders
 .vscode/
+
+Calculation/probs.txt
