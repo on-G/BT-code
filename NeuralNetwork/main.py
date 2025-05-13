@@ -150,5 +150,13 @@ classifier.save_model(save_file)
 
 print("-------------------- Model saved --------------------")
 
+############################### Compute cut-off ###############################
+print("-------------------- COMPUTE CUT-OFF --------------------")
+youden_j = classifier.tpr - classifier.fpr
+best_idx = np.argmax(youden_j)
+best_threshold = classifier.thresholds[best_idx]
+print("Cut-off: ", best_threshold)
+# output: 0.5460971
+
 ############################### End ###############################
 print("--------------------END--------------------")
