@@ -25,3 +25,4 @@ NeuralNetwork/saved_models
 .vscode/
 
 Calculation/probs.txt
+Calculation/NewProbs.txt
