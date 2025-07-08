@@ -3,171 +3,39 @@
 ---
 - [Instructions to run the code](#instructions-to-run-the-code)
     - [Analysis](#analysis)
-        - [Docker Analysis](#docker-analysis)
-        - [Run Analysis](#run-analysis)
-    - [EDO Neural network](#edo-neural-network)
-        - [Docker EDO](#docker-edo)
-        - [Run Neural Network EDO](#neural-network-edo)
     - [Neural network](#neural-network)
-        - [Training](#training)
-            - [Docker Neural Network](#docker-neural-network)
-            - [Train Neural Network](#train-neural-network)
-        - [Real data](#real-data)
-    - [Appendice](#appendice)
-        - [Root Trees](#root-trees)
----
-
->Author: Giovanni Pedrelli
+    - [Prediction](#prediction)
+    - [Fit](#fit)
 
 
 ## Analysis
-### Docker Analysis
-Inside the directory where the `.dockerfile` is, build the `dockerfile` to get a docker image
 
-```bash
-sudo docker build -f analysis.dockerfile -t analysis .
-```
-
-See the images installed
-```bash
-sudo docker images
-```
-
-<!--
-Rename an image
-```bash
-sudo docker tag <tag> <name>
-```
--->
-
-<!--
-Remove a docker image
-```bash
-sudo docker rmi <name>:<tag>
-```
--->
-
-Run the docker image:
-- as `root`
-    ```bash
-    sudo docker run \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v /home/giovanni-pedrelli/Scrivania/TESI/Analysis:/opt \
-    --rm \
-    -it \
-    analysis bash
-    ```
-
-- with `--user $(id -u)` **ALLOWS YOU TO USE TBrowser**
-    ```bash
-    sudo docker run \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -v /home/giovanni-pedrelli/Scrivania/TESI/Analysis:/opt \
-    --rm \
-    -it \
-    --user $(id -u) \
-    analysis bash
-    ```
-
-
-### Run Analysis
-**Inside the docker container**
-
-Move to the right folder
-```bash
-cd /home/giovanni-pedrelli/TESI/Analysis
-```
-
-Run the script
+Move to the folder 'main/Analysis' and run the command:
 ```bash
 python3 analysis.py
 ```
 
-
-
-
-
-
-## EDO Neural network
-### Docker EDO
-
-Run the docker image:
-```bash
-sudo docker run \
--e DISPLAY=$DISPLAY \
--v /tmp/.X11-unix:/tmp/.X11-unix \
--v /home/giovanni-pedrelli/Scrivania/SC-EXAM/:/app \
---rm \
--it \
-neural-network bash
-```
-
-### Neural Network EDO
-**Inside the docker container**
-
-```bash
-cd Python_Cat
-```
-
-```bash
-python3 main.py Neural_Network
-```
-
-
-
-
+Once done you will find the correlation matrixes and the histograms of the variables that will be used in the folder `main/Analysis/plots`.
 
 ## Neural network
-### Training
-#### Docker Neural Network
-
-Inside the directory where the `.dockerfile` is, build the `.dockerfile` to get a docker image
-
-```bash
-sudo docker build -f neural-network.dockerfile -t neural-network .
-```
-
-See the images installed
-```bash
-sudo docker images
-```
-
-Run the docker image:
-```bash
-sudo docker run \
--e DISPLAY=$DISPLAY \
--v /tmp/.X11-unix:/tmp/.X11-unix \
--v /home/giovanni-pedrelli/Scrivania/TESI/NeuralNetwork:/app \
---rm \
--it \
-neural-network bash
-```
-
-#### Train Neural Network
-**Inside the docker container**
-
-Run the code to train the Neural Netrwork
+Now move to the folder 'main/NeuralNetwork'. To train the model run the command:
 ```bash
 python3 main.py Neural_Network
 ```
+In `main/NeuralNetwork/evaluation_results` will be stored the roc curve, the confusion matrix and a feature importance plot.
 
+## Prediction
 
-### Real data
-
-...
-
-
-
-## Appendice
-### ROOT Trees
-Inspect inside a `.root` file. **Inside ROOT**
-
+To apply the trained model on real data move to the folder `main/Calculation` and run the command:
 ```bash
-std::unique_ptr<TFile> myFile( TFile::Open("*_*filename*_*.root") );
+python3 Prediction.py
 ```
 
+## Fit
+
+To fit the data you first need to select the events with a probability value above the cut-off, to do so run:
 ```bash
-myFile->ls()
+python3 FitPrep.py
 ```
+
+Then the actual fit is done by running the ROOT macro `fitTest.C`.
