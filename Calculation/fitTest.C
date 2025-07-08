@@ -85,7 +85,7 @@ void fitTest(Int_t iBin = 0, Int_t rebin = 1, Float_t iMin = -1, Float_t iMax = 
   TH2F *hData;
   hData = (TH2F*)fileIn->Get("MVA_vs_InvMass");
   hData->GetXaxis()->SetRangeUser(iMin, iMax);
-  TH1D *histogram = (TH1D*)hData->ProjectionY("histogram");       //Penso sia l'istogramma delle masse */
+  TH1D *histogram = (TH1D*)hData->ProjectionY("histogram"); */
   TH1D *histogram = new TH1D("histogram", "Mass distribution", 40, 2.0865, 2.4865);
   ifstream filein("Mass.txt");
   Double_t x;
@@ -118,8 +118,6 @@ void fitTest(Int_t iBin = 0, Int_t rebin = 1, Float_t iMin = -1, Float_t iMax = 
   histogramToBeFitted->SetMarkerStyle(20);
   histogramToBeFitted->SetMarkerColor(kBlack);  
   histogramToBeFitted->SetLineColor(kBlack);  
-
-  printf("Minimum: %0.4f, bin: %0.4f at mass: %0.4f", histogramToBeFitted->GetMinimum(), histogramToBeFitted->GetMinimumBin(), histogramToBeFitted->GetBinCenter(histogramToBeFitted->GetMinimumBin()));
 
   Double_t parB[/*4*/3];
   Double_t parS[3];
