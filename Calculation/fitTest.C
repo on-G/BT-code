@@ -51,7 +51,7 @@ Double_t fitFunc(Double_t* x, Double_t* par)
   return total;
 }
 
-void fitTest(Int_t iBin = 0, Int_t rebin = 1, Float_t iMin = -1, Float_t iMax = 1, Float_t massMin = 2.0865, Float_t massMax = 2.4865, Int_t nsigma = 3) {
+void fitTest(Int_t iBin = 1, Int_t rebin = 10, Float_t iMin = 0.2, Float_t iMax = 1, Float_t massMin = 2.148, Float_t massMax = 2.44, Int_t nsigma = 3) {
 
   gROOT->SetStyle("Plain");
   gStyle->SetPalette(1);
@@ -86,14 +86,28 @@ void fitTest(Int_t iBin = 0, Int_t rebin = 1, Float_t iMin = -1, Float_t iMax = 
   hData = (TH2F*)fileIn->Get("MVA_vs_InvMass");
   hData->GetXaxis()->SetRangeUser(iMin, iMax);
   TH1D *histogram = (TH1D*)hData->ProjectionY("histogram"); */
-  TH1D *histogram = new TH1D("histogram", "Mass distribution", 40, 2.0865, 2.4865);
+  /*TH1D *histogram = new TH1D("histogram", "Mass distribution", 40, 2.0865, 2.4865);
   ifstream filein("Mass.txt");
   Double_t x;
   while (filein.good()){
     filein >> x;
     histogram->Fill(x);
   }
-  TH1D *histogramToBeFitted = (TH1D*)histogram->Clone("histogramToBeFitted");
+  TH1D *histogramToBeFitted = (TH1D*)histogram->Clone("histogramToBeFitted");*/
+
+  TH2D *histogram = new TH2D("MVA_vs_InvMass", "MVA_vs_InvMass; pyKeras; m_{inv}(pK^{0}_{S})[GeV/#it{c}^{2}]", 1000, 0, 1, 1000, 2.05, 2.55);
+  ifstream filein("Mass.txt");
+  ifstream probs("probs.txt");
+  Double_t x;
+  Double_t y;
+  while (filein.good()){
+    filein >> y;
+    probs >> x;
+    histogram->Fill(x,y);
+  }
+
+  histogram->GetXaxis()->SetRangeUser(iMin, iMax);
+  TH1D *histogramToBeFitted = (TH1D*)histogram->ProjectionY("histogramToBeFitted");
   
   histogramToBeFitted->Rebin(rebin);
   
@@ -108,7 +122,7 @@ void fitTest(Int_t iBin = 0, Int_t rebin = 1, Float_t iMin = -1, Float_t iMax = 
   histogramToBeFitted->GetYaxis()->SetLabelFont(42);
   histogramToBeFitted->GetYaxis()->SetTitle(Form("Entries / %3.1f MeV/#it{c}^{2}", histogramToBeFitted->GetBinWidth(1)*1000.));
   histogramToBeFitted->GetXaxis()->SetTitle(Form("m_{inv}(pK_{S}^{0})[GeV/#it{c}^{2}]"));
-  histogramToBeFitted->GetYaxis()->SetRangeUser(/*histogramToBeFitted->GetMinimum()*0.8*/ 150000, /*histogramToBeFitted->GetMaximum()*1.05*/168000);
+  histogramToBeFitted->GetYaxis()->SetRangeUser(/*histogramToBeFitted->GetMinimum()*0.8*/236000, /*histogramToBeFitted->GetMaximum()*1.05*/267000);
   histogramToBeFitted->GetYaxis()->SetTitleOffset(2);
   histogramToBeFitted->GetXaxis()->SetTitleOffset(1.25);
   histogramToBeFitted->GetXaxis()->SetTitleSize(0.035);

@@ -20,7 +20,7 @@ massLc2K0Sp_np = massLc2K0Sp.to_numpy()
 probs = np.loadtxt("probs.txt")
 
 # Cut Off value
-CutOff = 0.546
+CutOff = 0
 
 # Select events with prob above cut off value
 i = 0

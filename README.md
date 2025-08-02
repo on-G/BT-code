@@ -33,9 +33,4 @@ python3 Prediction.py
 
 ## Fit
 
-To fit the data you first need to select the events with a probability value above the cut-off, to do so run:
-```bash
-python3 FitPrep.py
-```
-
-Then the actual fit is done by running the ROOT macro `fitTest.C`.
+To fit the data run the ROOT macro `fitTest.C`. Keep in mind that the cutoff value to be applied to the data is represented by the iMin variable in the argument list of the fitTest function.
